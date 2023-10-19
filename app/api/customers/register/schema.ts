@@ -2,39 +2,40 @@ import validator from 'validator';
 import { z } from 'zod';
 
 const maritalStatusOptions = [
-  'Single',
-  'Married',
-  'Domestic Partnership',
-  'Divorced',
-  'Separated',
-  'Widowed',
-  'Civil Union',
-  'Other',
-  'Prefer Not to Say',
+  'SINGLE',
+  'MARRIED',
+  'DOMESTIC_PARTNERSHIP',
+  'DIVORCED',
+  'SEPARATED',
+  'WIDOWED',
+  'CIVIL_UNION',
+  'OTHER',
+  'PREFER_NOT_TO_SAY',
 ] as const;
 
 const employmentStatusOptions = [
-  'Full-Time Employee',
-  'Part-Time Employee',
-  'Contractor',
-  'Freelancer',
-  'Temporary Employee',
-  'Intern',
-  'Apprentice',
-  'Self-Employed',
-  'Unemployed',
-  'Retired',
-  'Student',
-  'Homemaker',
-  'Other',
+  'FULL_TIME',
+  'PART_TIME',
+  'CONTRACTOR',
+  'FREELANCER',
+  'TEMPORARY_EMPLOYEE',
+  'INTERN',
+  'APPRENTICE',
+  'SELF_EMPLOYED',
+  'UNEMPLOYED',
+  'RETIRED',
+  'STUDENT',
+  'HOME_MAKER',
+  'OTHER',
 ] as const;
 
 const cardOptions = [
   'NHIS',
   'VOTER',
   'DVLA',
-  'NATIONAL CARD',
+  'NATIONAL_CARD',
   'SNNIT',
+  'OTHER',
 ] as const;
 
 const schema = z.object({

@@ -43,6 +43,7 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
+  loans          Loan[]
 }
 
 model VerificationToken {
@@ -51,4 +52,80 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Customer {
+  id               String                  @id @default(uuid())
+  firstName        String
+  lastName         String
+  email            String                  @unique
+  maritalStatus    MaritalStatusOptions?   @default(SINGLE)
+  employmentStatus EmploymentStatusOptions @default(OTHER)
+  employer         String
+  dateOfBirth      DateTime
+  cardType         CardOptions             @default(OTHER)
+  cardUniqueNo     String
+  address          String
+  phoneNumber      String
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  loans            Loan[]
+}
+
+model Loan {
+  id            String      @id @default(uuid())
+  principal     Float       @db.DoublePrecision
+  rate          Float       @db.DoublePrecision
+  time          Int
+  amountPayable Float       @db.DoublePrecision
+  userId        String
+  createdBy     User        @relation(fields: [userId], references: [id])
+  customerId    String
+  customer      Customer    @relation(fields: [customerId], references: [id])
+  status        LoanStatus? @default(APPROVED)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum LoanStatus {
+  APPROVED
+  DENIED
+  PROCESSING
+}
+
+enum MaritalStatusOptions {
+  SINGLE
+  MARRIED
+  DOMESTIC_PARTNERSHIP
+  DIVORCED
+  SEPARATED
+  WIDOWED
+  CIVIL_UNION
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum EmploymentStatusOptions {
+  FULL_TIME
+  PART_TIME
+  CONTRACTOR
+  FREELANCER
+  TEMPORARY_EMPLOYEE
+  INTERN
+  APPRENTICE
+  SELF_EMPLOYED
+  UNEMPLOYED
+  RETIRED
+  STUDENT
+  HOME_MAKER
+  OTHER
+}
+
+enum CardOptions {
+  NHIS
+  VOTER
+  DVLA
+  NATIONAL_CARD
+  SNNIT
+  OTHER
 }

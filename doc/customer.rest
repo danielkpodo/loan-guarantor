@@ -4,16 +4,36 @@ POST http://localhost:3000/api/customers/register
 Content-Type: application/json
 
 {
-    "firstName":"Dan",
+    "firstName":"Dee",
     "lastName": "Mensah",
-    "email":"dd@gmail.com",
-    "maritalStatus": "Married",
-    "employmentStatus": "Retired",
-    "employer": "Mangland",
-    "dateOfBirth": "1/10/23",
+    "email":"deemensah12@gmail.com",
+    "maritalStatus": "MARRIED",
+    "employmentStatus": "RETIRED",
+    "employer": "Ghana Health Service",
+    "dateOfBirth": "1994-04-06T00:00:00Z",
     "cardType": "NHIS",
     "cardUniqueNo": "NHIS001324",
     "address": "Kokomlemle",
-    "phoneNumber": "+23354243"
+    "phoneNumber": "+233542433262"
 }
 
+### APPLY FOR A LOAN
+# rate => percentage
+# time => time
+POST http://localhost:3000/api/loans/apply
+Content-Type: application/json
+
+{
+    "customerId": "edbeccb4-d612-4592-bba3-a3193c161e70",
+    "userId": "clnxfz1eh0000pzt6begnmc5o",
+    "principal": 1500.00,
+    "rate": 4.75,
+    "time": 12
+}
+
+### GET ALL LOANS
+
+### Add route to get a loan of a customer
+
+
+# i started at 10:00 am on oct
