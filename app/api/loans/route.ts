@@ -2,26 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
 import prisma from '@/prisma/client';
-import { z } from 'zod';
+import schema from './schema';
 
-const schema = z.object({
-  customerId: z
-    .string({ required_error: 'Customer Id is required' })
-    .trim()
-    .min(1, { message: 'You have not specified a customer id' })
-    .uuid({ message: 'Invalid uuid for customer' }),
-  userId: z
-    .string({ required_error: 'Agent ID is required' })
-    .trim()
-    .min(1, { message: 'Agent id is needed for this action' })
-    .cuid({ message: 'Invalid cuid' }),
-  principal: z.number({
-    required_error: 'Principal is required',
-    invalid_type_error: 'Amount must be a number',
-  }),
-  rate: z.number().optional(),
-  time: z.number().optional(),
-});
+export async function GET(request: NextRequest) {
+  const loans = await prisma.loan.findMany({
+    include: {
+      customer: { select: { firstName: true, lastName: true } },
+      createdBy: { select: { email: true } },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return NextResponse.json({
+    statusCode: StatusCodes.OK,
+    statusText: ReasonPhrases.OK,
+    data: loans,
+  });
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.json();

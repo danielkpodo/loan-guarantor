@@ -1,39 +1,25 @@
-### Register new Company Agents
-
-POST http://localhost:3000/api/customers/register
+### Register as a Customer
+POST http://localhost:3000/api/customers/
 Content-Type: application/json
 
 {
-    "firstName":"Dee",
-    "lastName": "Mensah",
-    "email":"deemensah12@gmail.com",
-    "maritalStatus": "MARRIED",
-    "employmentStatus": "RETIRED",
-    "employer": "Ghana Health Service",
+    "firstName":"James",
+    "lastName": "Bond",
+    "email":"jbond@gmail.com",
+    "maritalStatus": "SINGLE",
+    "employmentStatus": "UNEMPLOYED",
+    "employer": "Actor",
     "dateOfBirth": "1994-04-06T00:00:00Z",
-    "cardType": "NHIS",
+    "cardType": "DVLA",
     "cardUniqueNo": "NHIS001324",
     "address": "Kokomlemle",
     "phoneNumber": "+233542433262"
 }
 
-### APPLY FOR A LOAN
-# rate => percentage
-# time => time
-POST http://localhost:3000/api/loans/apply
+
+### GET ALL CUSTOMER LOANS
+GET http://localhost:3000/api/customers/
 Content-Type: application/json
 
-{
-    "customerId": "edbeccb4-d612-4592-bba3-a3193c161e70",
-    "userId": "clnxfz1eh0000pzt6begnmc5o",
-    "principal": 1500.00,
-    "rate": 4.75,
-    "time": 12
-}
-
-### GET ALL LOANS
-
-### Add route to get a loan of a customer
 
 
-# i started at 10:00 am on oct

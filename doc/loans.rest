@@ -1,0 +1,18 @@
+###
+GET http://localhost:3000/api/loans
+Content-Type: application/json
+
+
+### APPLY FOR A LOAN
+# rate => percentage
+# time => time
+POST http://localhost:3000/api/loans/
+Content-Type: application/json
+
+{
+    "customerId": "37f16d1b-4e84-490c-92bf-0e67b6705a81",
+    "userId": "clnxfz1eh0000pzt6begnmc5o",
+    "principal": 3000.00,
+    "rate": 30,
+    "time": 3
+}

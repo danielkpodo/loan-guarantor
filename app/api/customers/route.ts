@@ -4,6 +4,20 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import prisma from '@/prisma/client';
 import schema from './schema';
 
+export async function GET(request: NextRequest) {
+  const customers = await prisma.customer.findMany({
+    include: { loans: {} },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return NextResponse.json({
+    statusCode: StatusCodes.OK,
+    statusText: ReasonPhrases.OK,
+    message: 'Customer created successfully',
+    data: customers,
+  });
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
@@ -38,6 +52,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(
     {
+      statusCode: StatusCodes.CREATED,
       statusText: ReasonPhrases.CREATED,
       message: 'Customer created successfully',
       data: customer,
