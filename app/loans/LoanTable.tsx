@@ -23,8 +23,8 @@ export interface UserProps {
   user: {
     id: string;
     email: string;
-    name: string | null | undefined;
-    image: string | null | undefined;
+    name: string | undefined | null;
+    image: string | undefined | null;
   };
 }
 
