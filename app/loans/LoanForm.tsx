@@ -10,7 +10,6 @@ import {
 } from '../components/ui/command';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -23,9 +22,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '../components/ui/popover';
-import React, { useEffect, useState } from 'react';
-import axios, { AxiosError } from 'axios';
 import { errorToast, successToast } from '../utils/toast';
+import { useEffect, useState } from 'react';
 
 import { BASE_URL } from '../utils/constansts';
 import { Button } from '../components/ui/button';
@@ -34,6 +32,7 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import { Label } from '../components/ui/label';
 import { Loader2 } from 'lucide-react';
 import { UserProps } from './LoanTable';
+import axios from 'axios';
 import { cn } from '../../lib/utils';
 import { useRouter } from 'next/navigation';
 
@@ -45,8 +44,6 @@ interface CustomerDTO {
 
 const LoanForm = ({ user }: UserProps) => {
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [customers, setCustomers] = useState<CustomerDTO[]>([]);
 

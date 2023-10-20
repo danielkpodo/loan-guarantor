@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       {
         statusCode: StatusCodes.BAD_REQUEST,
         statusText: ReasonPhrases.BAD_REQUEST,
-        message: 'There is an existing customer with this email',
+        message: 'Customer email already exists',
       },
       { status: StatusCodes.BAD_REQUEST }
     );

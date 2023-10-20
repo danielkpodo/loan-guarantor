@@ -1,9 +1,7 @@
 import { BASE_URL } from '../utils/constansts';
-import { Button } from '../components/ui/button';
-import { FaUserPlus } from 'react-icons/fa';
 import Link from 'next/link';
-import React from 'react';
 import moment from 'moment';
+
 interface CustomerDTO {
   id: string;
   firstName: string;
@@ -38,9 +36,12 @@ export default async function CustomerTable() {
           </p>
         </div>
         <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
-          <Button className='rounded-md bg-indigo-600  text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-            <FaUserPlus className='mr-2 h-4 w-4' /> Add Customer
-          </Button>
+          <Link
+            href='/customers/new'
+            className='rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Add Customer
+          </Link>
         </div>
       </div>
       <div className='mt-8 flow-root'>
