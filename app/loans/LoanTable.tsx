@@ -1,3 +1,4 @@
+import { BASE_URL } from '../utils/constansts';
 import LoanForm from './LoanForm';
 import formatCurrency from '../utils/formatCurrency';
 import moment from 'moment';
@@ -29,7 +30,7 @@ export interface UserProps {
 }
 
 export default async function LoanTable({ user }: UserProps) {
-  const response = await fetch('http://localhost:3000/api/loans', {
+  const response = await fetch(`${BASE_URL}/loans`, {
     cache: 'no-store',
   });
   const results = await response.json();
