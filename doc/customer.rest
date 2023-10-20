@@ -3,16 +3,16 @@ POST http://localhost:3000/api/customers/
 Content-Type: application/json
 
 {
-    "firstName":"Doreen",
-    "lastName": "Narh",
-    "email":"deenarh@gmail.com",
-    "maritalStatus": "MARRIED",
-    "employmentStatus": "UNEMPLOYED",
-    "employer": "Actor",
+    "firstName":"Jake",
+    "lastName": "Kpodo",
+    "email":"jakekpodo@gmail.com",
+    "maritalStatus": "SINGLE",
+    "employmentStatus": "STUDENT",
+    "employer": "Meta",
     "dateOfBirth": "1994-04-06T00:00:00Z",
-    "cardType": "DVLA",
-    "cardUniqueNo": "NHIS001324",
-    "address": "Kokomlemle",
+    "cardType": "NHIS",
+    "cardUniqueNo": "NHIS02843",
+    "address": "Accra, East Legon",
     "phoneNumber": "+233542433262"
 }
 
