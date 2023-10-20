@@ -3,7 +3,7 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-  "email": "kpododanielnarh+33@gmail.com",
+  "email": "kpododanielnarh@gmail.com",
   "password": "dannewman33"
 }
 

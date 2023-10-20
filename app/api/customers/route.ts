@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     statusCode: StatusCodes.OK,
     statusText: ReasonPhrases.OK,
-    message: 'Customer created successfully',
     data: customers,
   });
 }

@@ -35,8 +35,20 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
   session: {
     strategy: 'jwt',
+  },
+
+  // include id into user obj
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
   },
 };
 

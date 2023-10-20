@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(
     {
+      statusCode: StatusCodes.CREATED,
       statusText: ReasonPhrases.CREATED,
       message: 'Loan approved successfully',
       data: loan,

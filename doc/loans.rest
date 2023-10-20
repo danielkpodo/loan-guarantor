@@ -10,8 +10,8 @@ POST http://localhost:3000/api/loans/
 Content-Type: application/json
 
 {
-    "customerId": "37f16d1b-4e84-490c-92bf-0e67b6705a81",
-    "userId": "clnxfz1eh0000pzt6begnmc5o",
+    "customerId": "f40b2365-8e0c-4c57-abd8-a1a0f9cdbcc9",
+    "userId": "clnyb2sz70000pzmbclllxalf",
     "principal": 3000.00,
     "rate": 30,
     "time": 3

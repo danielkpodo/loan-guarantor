@@ -1,10 +1,12 @@
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthProvider from './context/AuthProvider';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import Navbar from './components/Navbar';
 import NextTopLoader from 'nextjs-toploader';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +28,7 @@ export default function RootLayout({
           <Navbar />
           <main className='p-5'>{children}</main>
         </AuthProvider>
+        <ToastContainer className='w-1/2' />
       </body>
     </html>
   );

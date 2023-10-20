@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import LoanForm from './LoanForm';
 import formatCurrency from '../utils/formatCurrency';
 import moment from 'moment';
 
@@ -19,7 +19,16 @@ interface loanDTO {
   };
 }
 
-export default async function LoanTable() {
+export interface UserProps {
+  user: {
+    id: string;
+    email: string;
+    name: string | null | undefined;
+    image: string | null | undefined;
+  };
+}
+
+export default async function LoanTable({ user }: UserProps) {
   const response = await fetch('http://localhost:3000/api/loans', {
     cache: 'no-store',
   });
@@ -38,12 +47,7 @@ export default async function LoanTable() {
           </p>
         </div>
         <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
-          <Link
-            href='/loans/new'
-            className='block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            Add New Loan
-          </Link>
+          <LoanForm user={user} />
         </div>
       </div>
       <div className='mt-5 flow-root'>

@@ -15,9 +15,7 @@ function classNames(...classes: string[]) {
 }
 
 const Navbar = () => {
-  const router = useRouter();
   const { data: session, status } = useSession();
-
   return (
     <Disclosure as='nav' className='bg-white shadow'>
       {({ open }) => (
@@ -31,12 +29,18 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
-                  <a
-                    href='#'
+                  <Link
+                    href='/loans'
                     className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   >
-                    Team
-                  </a>
+                    Loans
+                  </Link>
+                  <Link
+                    href='/customers'
+                    className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  >
+                    Customer
+                  </Link>
                 </div>
               </div>
               <div className='hidden sm:ml-6 sm:flex sm:items-center'>
