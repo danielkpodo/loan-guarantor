@@ -110,7 +110,11 @@ const LoanForm = ({ user }: UserProps) => {
       router.refresh();
     } catch (error) {
       setIsLoading(false);
-      errorToast(error.response.data.message);
+      if (axios.isAxiosError(error)) {
+        errorToast(error.response?.data?.message);
+      } else {
+        console.error('Non-Axios Error:', error);
+      }
     }
   };
 
