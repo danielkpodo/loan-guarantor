@@ -7,7 +7,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '../components/ui/command';
+} from '../../components/ui/command';
 import {
   Dialog,
   DialogContent,
@@ -16,24 +16,24 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../components/ui/dialog';
+} from '../../components/ui/dialog';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '../components/ui/popover';
-import { errorToast, successToast } from '../utils/toast';
+} from '../../components/ui/popover';
+import { errorToast, successToast } from '../../utils/toast';
 import { useEffect, useState } from 'react';
 
-import { BASE_URL } from '../utils/constansts';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
+import { BASE_URL } from '../../utils/constansts';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
 import { IoAddCircleOutline } from 'react-icons/io5';
-import { Label } from '../components/ui/label';
+import { Label } from '../../components/ui/label';
 import { Loader2 } from 'lucide-react';
 import { UserProps } from './LoanTable';
 import axios from 'axios';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../lib/utils';
 import { useRouter } from 'next/navigation';
 
 interface CustomerDTO {

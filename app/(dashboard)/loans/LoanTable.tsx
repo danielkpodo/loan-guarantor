@@ -1,6 +1,6 @@
-import { BASE_URL } from '../utils/constansts';
+import { BASE_URL } from '../../utils/constansts';
 import LoanForm from './LoanForm';
-import formatCurrency from '../utils/formatCurrency';
+import formatCurrency from '../../utils/formatCurrency';
 import moment from 'moment';
 
 interface loanDTO {

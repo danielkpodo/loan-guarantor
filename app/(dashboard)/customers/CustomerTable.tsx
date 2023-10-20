@@ -1,4 +1,4 @@
-import { BASE_URL } from '../utils/constansts';
+import { BASE_URL } from '../../utils/constansts';
 import Link from 'next/link';
 import moment from 'moment';
 

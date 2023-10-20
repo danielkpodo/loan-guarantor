@@ -1,6 +1,6 @@
 import LoanTable from './LoanTable';
 import React from 'react';
-import authOptions from '../api/auth/authOptions';
+import authOptions from '../../api/auth/authOptions';
 import { getServerSession } from 'next-auth';
 
 const Loan = async () => {
