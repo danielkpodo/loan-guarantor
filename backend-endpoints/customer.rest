@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "firstName":"Jake",
     "lastName": "Kpodo",
-    "email":"jakekpodo@gmail.com",
+    "email":"jake33kpodo@gmail.com",
     "maritalStatus": "SINGLE",
     "employmentStatus": "STUDENT",
     "employer": "Meta",

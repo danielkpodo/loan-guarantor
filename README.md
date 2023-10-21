@@ -46,8 +46,32 @@ git clone git@github.com:danielkpodo/loan-guarantor.git
   npm install or yarn install
 ```
 
-- Next run the project by running
+- Next, run the below command in your project terminal to migrate the prisma models in `prisma/schema.prisma` to populate your database
+
+```
+  npx prisma migrate dev --name init
+```
+
+- Now run the project by running
 
 ```
  npm run dev
+```
+
+- Your project should now start on a given port. You should see this in your terminal
+
+## Creating a Test User to Login
+
+- Install the extension `REST client` in vscode or use postman to create a test user as shown below
+- Use the created password to login into the application portal
+
+```bash
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "email": "someone@example.com",
+  "password": "randompasscode"
+}
+
 ```
