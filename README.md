@@ -1,4 +1,4 @@
-## Loan Guarantor Application
+# Loan Guarantor Application
 
 A loan guarantor application where a company agent logs in and distribute loans to customers
 
