@@ -1,14 +1,24 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { errorToast, successToast } from './utils/toast';
+import { signIn, useSession } from 'next-auth/react';
 
 import { SiMoneygram } from 'react-icons/si';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const router = useRouter();
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    // prevent access to login page when user is already logged in
+    if (session?.user) {
+      router.push('/loans');
+    }
+  }, [session, router]);
+
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +33,7 @@ export default function Login() {
       redirect: false,
       callbackUrl: '/', //the sigin url
     });
-    console.log('Response', res);
+
     setLoading(false);
     if (!res?.error) {
       successToast('Successful redirecting...');
