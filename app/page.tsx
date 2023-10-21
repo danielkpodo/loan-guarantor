@@ -11,15 +11,15 @@ export default function Login() {
   const router = useRouter();
   const { status } = useSession();
 
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   useEffect(() => {
     if (status === 'authenticated') {
       router.back();
     }
   }, [status, router]);
-
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
