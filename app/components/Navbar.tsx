@@ -24,7 +24,7 @@ const Navbar = () => {
             <div className='flex h-16 justify-between'>
               <div className='flex'>
                 <div className='flex flex-shrink-0 items-center'>
-                  <Link href='/'>
+                  <Link href='/loans'>
                     <SiMoneygram size={35} color='#3085C3' />
                   </Link>
                 </div>
@@ -120,11 +120,11 @@ const Navbar = () => {
             <div className='border-t border-gray-200 pb-3 pt-4'>
               <div className='flex items-center px-4'>
                 <div className='flex-shrink-0'>
-                  <img
-                    className='h-10 w-10 rounded-full'
-                    src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                    alt=''
-                  />
+                  <Avatar>
+                    <AvatarFallback className='bg-indigo-500 text-white'>
+                      {session?.user?.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
                 <div className='ml-3'>
                   <div className='text-sm font-medium text-gray-500'>

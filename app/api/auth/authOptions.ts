@@ -24,14 +24,15 @@ const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (!user) return null;
+        if (!user) throw new Error('invalid credentials');
 
         const passwordsMatch = await bcrypt.compare(
           credentials.password,
           user.hashedPassword!
         );
 
-        return passwordsMatch ? user : null;
+        if (!passwordsMatch) throw new Error('Invalid credentials');
+        return user;
       },
     }),
   ],
@@ -40,7 +41,7 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
 
-  // include id into user obj
+  // include id into user
   callbacks: {
     session: ({ session, token }) => ({
       ...session,
@@ -49,6 +50,10 @@ const authOptions: NextAuthOptions = {
         id: token.sub,
       },
     }),
+  },
+  pages: {
+    // useful for customizing next-auth auth pages
+    signIn: '/',
   },
 };
 

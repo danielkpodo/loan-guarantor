@@ -27,7 +27,7 @@ export default function AdminLayout({
           <Navbar />
           <main className='p-5'>{children}</main>
         </AuthProvider>
-        <ToastContainer className='w-1/2' />
+        <ToastContainer />
       </body>
     </html>
   );
