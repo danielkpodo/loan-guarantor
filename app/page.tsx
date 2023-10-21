@@ -2,13 +2,20 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { errorToast, successToast } from './utils/toast';
+import { signIn, useSession } from 'next-auth/react';
 
 import { SiMoneygram } from 'react-icons/si';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.back();
+    }
+  }, [status, router]);
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -32,7 +39,6 @@ export default function Login() {
     } else {
       errorToast(res.error);
       setPassword('');
-      setEmail('');
     }
   };
 
