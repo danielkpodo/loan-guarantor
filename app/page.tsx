@@ -17,13 +17,13 @@ export default function Login() {
     e.preventDefault();
 
     setLoading(true);
-
     const res = await signIn('credentials', {
       email,
       password,
       redirect: false,
       callbackUrl: '/', //the sigin url
     });
+    console.log('Response', res);
     setLoading(false);
     if (!res?.error) {
       successToast('Successful redirecting...');
