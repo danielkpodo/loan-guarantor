@@ -1,7 +1,8 @@
 import { BASE_URL } from '../../utils/constansts';
 import Link from 'next/link';
+import NoData from '@/app/components/NoData';
+import { headers } from 'next/headers';
 import moment from 'moment';
-
 interface CustomerDTO {
   id: string;
   firstName: string;
@@ -19,31 +20,21 @@ interface CustomerDTO {
 
 export default async function CustomerTable() {
   const response = await fetch(`${BASE_URL}/customers`, {
+    headers: headers(), // attaching this reads cookies from the browser ( By default, cookies are not passed in a server-side fetch )
     cache: 'no-store',
   });
   const results = await response.json();
   const customers: CustomerDTO[] = results.data;
 
-  return (
-    <div className='px-4 sm:px-6 lg:px-8'>
-      <div className='sm:flex sm:items-center'>
-        <div className='sm:flex-auto'>
-          <h1 className='text-base font-semibold leading-6 text-gray-900'>
-            Customers
-          </h1>
-          <p className='mt-2 text-sm text-gray-700'>
-            Demographic information of all registered customers
-          </p>
+  function handlePageData() {
+    if (customers.length <= 0) {
+      return (
+        <div className='mt-20'>
+          <NoData message='Start adding customers to see data' />
         </div>
-        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
-          <Link
-            href='/customers/new'
-            className='rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            Add Customer
-          </Link>
-        </div>
-      </div>
+      );
+    }
+    return (
       <div className='mt-8 flow-root'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
@@ -116,7 +107,7 @@ export default async function CustomerTable() {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200'>
-                {customers.map((customer, index) => (
+                {customers?.map((customer, index) => (
                   <tr key={customer.email}>
                     <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0'>
                       {index + 1}
@@ -163,6 +154,30 @@ export default async function CustomerTable() {
           </div>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className='px-4 sm:px-6 lg:px-8'>
+      <div className='sm:flex sm:items-center'>
+        <div className='sm:flex-auto'>
+          <h1 className='text-base font-semibold leading-6 text-gray-900'>
+            Customers
+          </h1>
+          <p className='mt-2 text-sm text-gray-700'>
+            Demographic information of all registered customers
+          </p>
+        </div>
+        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
+          <Link
+            href='/customers/new'
+            className='rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Add Customer
+          </Link>
+        </div>
+      </div>
+      {handlePageData()}
     </div>
   );
 }

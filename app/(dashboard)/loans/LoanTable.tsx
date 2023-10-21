@@ -1,8 +1,9 @@
 import { BASE_URL } from '../../utils/constansts';
 import LoanForm from './LoanForm';
+import NoData from '@/app/components/NoData';
 import formatCurrency from '../../utils/formatCurrency';
+import { headers } from 'next/headers';
 import moment from 'moment';
-
 interface loanDTO {
   id: string;
   principal: number;
@@ -32,25 +33,20 @@ export interface UserProps {
 export default async function LoanTable({ user }: UserProps) {
   const response = await fetch(`${BASE_URL}/loans`, {
     cache: 'no-store',
+    headers: headers(),
   });
   const results = await response.json();
   const loans: loanDTO[] = results.data;
 
-  return (
-    <div className='px-10 sm:px-6 lg:px-8 '>
-      <div className='sm:flex sm:items-center'>
-        <div className='sm:flex-auto'>
-          <h1 className='text-base font-semibold leading-6 text-gray-900'>
-            Approved Loans
-          </h1>
-          <p className='mt-2 text-sm text-gray-700'>
-            A list of all recently approved loans
-          </p>
+  function handlePageDisplay() {
+    if (loans.length <= 0) {
+      return (
+        <div className='mt-20'>
+          <NoData message='Start adding data to view loans' />
         </div>
-        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
-          <LoanForm user={user} />
-        </div>
-      </div>
+      );
+    }
+    return (
       <div className='mt-5 flow-root'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
@@ -121,7 +117,7 @@ export default async function LoanTable({ user }: UserProps) {
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-gray-200 bg-white'>
-                  {loans.map((loan, index) => (
+                  {loans?.map((loan, index) => (
                     <tr key={loan.id}>
                       <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
                         {index + 1}
@@ -163,6 +159,25 @@ export default async function LoanTable({ user }: UserProps) {
           </div>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className='px-10 sm:px-6 lg:px-8 '>
+      <div className='sm:flex sm:items-center'>
+        <div className='sm:flex-auto'>
+          <h1 className='text-base font-semibold leading-6 text-gray-900'>
+            Approved Loans
+          </h1>
+          <p className='mt-2 text-sm text-gray-700'>
+            A list of all recently approved loans
+          </p>
+        </div>
+        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
+          <LoanForm user={user} />
+        </div>
+      </div>
+      {handlePageDisplay()}
     </div>
   );
 }
