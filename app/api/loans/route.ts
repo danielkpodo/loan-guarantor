@@ -1,10 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
+import authOptions from '../auth/authOptions';
+import { getServerSession } from 'next-auth';
 import prisma from '@/prisma/client';
 import schema from './schema';
 
 export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json(
+      {
+        statusCode: StatusCodes.UNAUTHORIZED,
+        statusText: ReasonPhrases.UNAUTHORIZED,
+        message: 'Unauthorized Access. No token provided',
+      },
+      { status: 401 }
+    );
+  }
+
   const loans = await prisma.loan.findMany({
     include: {
       customer: { select: { firstName: true, lastName: true } },
@@ -21,6 +35,18 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json(
+      {
+        statusCode: StatusCodes.UNAUTHORIZED,
+        statusText: ReasonPhrases.UNAUTHORIZED,
+        message: 'Unauthorized Access. No token provided',
+      },
+      { status: 401 }
+    );
+  }
+
   const body = await request.json();
 
   const validation = schema.safeParse(body);
