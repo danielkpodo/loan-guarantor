@@ -24,7 +24,7 @@ const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (!user) throw new Error('invalid credentials');
+        if (!user) throw new Error('Invalid credentials');
 
         const passwordsMatch = await bcrypt.compare(
           credentials.password,
