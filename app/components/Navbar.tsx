@@ -3,10 +3,11 @@
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Fragment, Suspense } from 'react';
 
-import { Fragment } from 'react';
 import Link from 'next/link';
 import { SiMoneygram } from 'react-icons/si';
+import { Skeleton } from './ui/skeleton';
 import { useSession } from 'next-auth/react';
 
 function classNames(...classes: string[]) {
@@ -48,11 +49,16 @@ const Navbar = () => {
                     <Menu.Button className='relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
                       <span className='absolute -inset-1.5' />
                       <span className='sr-only'>Open user menu</span>
-                      <Avatar>
-                        <AvatarFallback className='bg-indigo-500 text-white'>
-                          {session?.user?.email?.charAt(0).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
+                      {status === 'loading' && (
+                        <Skeleton className='h-11 w-11 rounded-full' />
+                      )}
+                      {status !== 'loading' && (
+                        <Avatar>
+                          <AvatarFallback className='bg-indigo-500 text-white'>
+                            {session?.user?.email?.charAt(0).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition

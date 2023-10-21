@@ -31,6 +31,7 @@ import { Input } from '../../components/ui/input';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { Label } from '../../components/ui/label';
 import { Loader2 } from 'lucide-react';
+import { ScrollArea } from '../../components/ui/scroll-area';
 import { UserProps } from './LoanTable';
 import axios from 'axios';
 import { cn } from '../../../lib/utils';
@@ -116,6 +117,7 @@ const LoanForm = ({ user }: UserProps) => {
   };
 
   return (
+    // you can set modal fase on dialog to remove the overlay
     <Dialog>
       <DialogTrigger asChild>
         <Button className='rounded-md bg-indigo-600 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
@@ -139,7 +141,7 @@ const LoanForm = ({ user }: UserProps) => {
                   variant='outline'
                   role='combobox'
                   aria-expanded={open}
-                  className='w-[200px] justify-between'
+                  className='w-[410px] justify-between'
                 >
                   {value
                     ? frameworks.find((framework) => framework.value === value)
@@ -148,34 +150,38 @@ const LoanForm = ({ user }: UserProps) => {
                   <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className='w-[200px] p-0'>
-                <Command>
-                  <CommandInput placeholder='Search framework...' />
-                  <CommandEmpty>No framework found.</CommandEmpty>
-                  <CommandGroup>
-                    {frameworks.map((framework) => (
-                      <CommandItem
-                        key={framework.value}
-                        onSelect={(currentValue) => {
-                          setValue(
-                            currentValue === value ? '' : framework.value
-                          );
-                          setOpen(false);
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            'mr-2 h-4 w-4',
-                            value === framework.value
-                              ? 'opacity-100'
-                              : 'opacity-0'
-                          )}
-                        />
-                        {framework.label}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </Command>
+
+              <PopoverContent className='w-[410px] p-0'>
+                <ScrollArea className='h-50 w-full'>
+                  <Command>
+                    <CommandInput placeholder='Search customer...' />
+                    <CommandEmpty>No customer found.</CommandEmpty>
+
+                    <CommandGroup>
+                      {frameworks.map((framework) => (
+                        <CommandItem
+                          key={framework.value}
+                          onSelect={(currentValue) => {
+                            setValue(
+                              currentValue === value ? '' : framework.value
+                            );
+                            setOpen(false);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              'mr-2 h-4 w-4',
+                              value === framework.value
+                                ? 'opacity-100'
+                                : 'opacity-0'
+                            )}
+                          />
+                          {framework.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
+                </ScrollArea>
               </PopoverContent>
             </Popover>
           </div>
