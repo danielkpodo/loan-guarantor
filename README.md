@@ -58,6 +58,14 @@ git clone git@github.com:danielkpodo/loan-guarantor.git
  npm run dev
 ```
 
+- To build the project and enjoy lightning fast speed run the command below
+
+```bash
+    npm run build
+```
+
+- Next run `npm run start` after the build is successful and complete
+
 - Your project should now start on a given port. You should see this in your terminal
 
 ## Creating a Test User to Login
