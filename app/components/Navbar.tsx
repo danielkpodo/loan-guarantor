@@ -3,11 +3,10 @@
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Fragment, useEffect } from 'react';
 
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { SiMoneygram } from 'react-icons/si';
-import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 function classNames(...classes: string[]) {

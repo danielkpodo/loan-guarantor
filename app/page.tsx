@@ -24,10 +24,12 @@ export default function Login() {
     });
     setLoading(false);
     if (!res?.error) {
-      successToast('Authentication successful');
+      successToast('Authentication successful...');
       router.push('/loans');
     } else {
       errorToast(res.error);
+      setPassword('');
+      setEmail('');
     }
   };
 
