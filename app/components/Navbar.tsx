@@ -3,12 +3,13 @@
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Fragment, Suspense } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 
+import { Button } from './ui/button';
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { SiMoneygram } from 'react-icons/si';
 import { Skeleton } from './ui/skeleton';
-import { useSession } from 'next-auth/react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -89,17 +90,15 @@ const Navbar = () => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href='/api/auth/signout'
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Sign out
-                          </Link>
-                        )}
+                        <Button
+                          className='text-indigo-400'
+                          variant='link'
+                          onClick={() => {
+                            signOut();
+                          }}
+                        >
+                          Sign Out
+                        </Button>
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
