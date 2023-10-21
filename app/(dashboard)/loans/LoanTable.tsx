@@ -21,13 +21,15 @@ interface loanDTO {
   };
 }
 
+type User = {
+  id: string;
+  email: string;
+  name: string;
+  image: string;
+};
+
 export interface UserProps {
-  user: {
-    id: string;
-    email: string;
-    name: string | undefined | null;
-    image: string | undefined | null;
-  };
+  user: User | any;
 }
 
 export default async function LoanTable({ user }: UserProps) {
