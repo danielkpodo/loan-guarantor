@@ -9,17 +9,17 @@ import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const router = useRouter();
-  const { status } = useSession();
+  const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (status === 'authenticated') {
+    if (session?.user && status === 'authenticated') {
       router.push('/loans');
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -29,9 +29,13 @@ export default function Login() {
       email,
       password,
       redirect: false,
+      // how to access query parameters in next13 in client component
+      // dynamically seup the callback url and use that
       // the redirect url upon successful login
       // callbackUrl: '/loans', this only works when redirect is true
     });
+
+    console.log(res);
 
     setLoading(false);
     if (!res?.error) {
