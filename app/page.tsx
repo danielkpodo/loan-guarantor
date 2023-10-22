@@ -3,9 +3,9 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { errorToast, successToast } from './utils/toast';
 import { signIn, useSession } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { SiMoneygram } from 'react-icons/si';
-import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const router = useRouter();
@@ -15,11 +15,15 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    if (session?.user && status === 'authenticated') {
-      router.push('/loans');
-    }
-  }, [status, router, session]);
+  // useEffect(() => {
+  //   if (session?.user && status === 'authenticated') {
+  //     router.push('/loans');
+  //   }
+  // }, [status, router, session]);
+
+  const searchQuery = useSearchParams();
+  const search = searchQuery.get('callbackUrl');
+  console.log('Search', search);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -35,12 +39,12 @@ export default function Login() {
       // callbackUrl: '/loans', this only works when redirect is true
     });
 
-    console.log(res);
+    console.log('Response', res);
 
     setLoading(false);
     if (!res?.error) {
       successToast('Authentication successful...');
-      router.push('/loans');
+      router.push(search ? search : '/loans');
     } else {
       errorToast(res.error);
       setPassword('');
