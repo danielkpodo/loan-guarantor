@@ -52,8 +52,13 @@ const authOptions: NextAuthOptions = {
     }),
   },
   pages: {
-    // useful for customizing next-auth auth pages
+    /**
+     * This are the url of the pages you setup
+     */
     signIn: '/',
+  },
+  theme: {
+    colorScheme: 'auto',
   },
 };
 

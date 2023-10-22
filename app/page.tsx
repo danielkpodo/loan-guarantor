@@ -17,7 +17,7 @@ export default function Login() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      router.back();
+      router.push('/loans');
     }
   }, [status, router]);
 
@@ -29,7 +29,8 @@ export default function Login() {
       email,
       password,
       redirect: false,
-      callbackUrl: '/', //the sigin url
+      // the redirect url upon successful login
+      // callbackUrl: '/loans', this only works when redirect is true
     });
 
     setLoading(false);
