@@ -44,7 +44,7 @@ export default function Login() {
     setLoading(false);
     if (!res?.error) {
       successToast('Authentication successful...');
-      router.push(search ? search : '/loans');
+      router.push(search ? search : '/loans'); //👏
     } else {
       errorToast(res.error);
       setPassword('');
