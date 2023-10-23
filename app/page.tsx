@@ -8,6 +8,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { SiMoneygram } from 'react-icons/si';
 
 export default function Login() {
+  const pathQuery = useSearchParams();
+  const urlPath = pathQuery.get('callbackUrl');
+
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -22,10 +25,6 @@ export default function Login() {
   //   }
   // }, [status, router, session]);
 
-  const searchQuery = useSearchParams();
-  const search = searchQuery.get('callbackUrl');
-  console.log('Search', search);
-
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -34,18 +33,12 @@ export default function Login() {
       email,
       password,
       redirect: false,
-      // how to access query parameters in next13 in client component
-      // dynamically seup the callback url and use that
-      // the redirect url upon successful login
-      // callbackUrl: '/loans', this only works when redirect is true
     });
-
-    console.log('Response', res);
 
     setLoading(false);
     if (!res?.error) {
       successToast('Authentication successful...');
-      router.push(search ? search : '/loans'); //👏
+      router.push(urlPath || '/loans');
     } else {
       errorToast(res.error);
       setPassword('');

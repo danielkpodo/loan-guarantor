@@ -74,10 +74,19 @@ const schema = z.object({
     })
     .trim()
     .min(1, { message: 'Please enter an employer name' }),
-  dateOfBirth: z.coerce.date({
-    required_error: 'Please select a date',
-    invalid_type_error: "That's not a date!",
-  }),
+  dateOfBirth: z.coerce
+    .date({
+      required_error: 'Please select a date',
+      invalid_type_error: "That's not a date!",
+    })
+    .refine(
+      (dob) => {
+        const currentDate = new Date();
+
+        return dob <= currentDate;
+      },
+      { message: 'Date cannot be in the futre' }
+    ),
   cardType: z.enum(cardOptions, {
     errorMap: (issue, ctx) => ({
       message: `Card type is not allowed`,
