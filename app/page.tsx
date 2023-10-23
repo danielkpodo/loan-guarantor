@@ -1,29 +1,21 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { errorToast, successToast } from './utils/toast';
-import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { SiMoneygram } from 'react-icons/si';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
+  const router = useRouter();
+
   const pathQuery = useSearchParams();
   const urlPath = pathQuery.get('callbackUrl');
-
-  const router = useRouter();
-  const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  //  fix issue on page so that user cannot access already login page
-  // useEffect(() => {
-  //   if (session?.user && status === 'authenticated') {
-  //     router.push('/loans');
-  //   }
-  // }, [status, router, session]);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
