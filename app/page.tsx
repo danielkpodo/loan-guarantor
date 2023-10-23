@@ -15,6 +15,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  //  fix issue on page so that user cannot access already login page
   // useEffect(() => {
   //   if (session?.user && status === 'authenticated') {
   //     router.push('/loans');
